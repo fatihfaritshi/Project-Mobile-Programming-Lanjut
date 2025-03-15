@@ -1,0 +1,22 @@
+import 'package:flutter/material.dart';
+
+class IconButtonDemo extends StatelessWidget {
+  const IconButtonDemo({super.key});
+
+  void showMessage(String message) {
+    print(message);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Icon Button Demo')),
+      body: Center(
+        child: IconButton(
+          icon: Icon(Icons.thumb_up),
+          onPressed: () => showMessage('Icon Button Clicked!'),
+        ),
+      ),
+    );
+  }
+}
