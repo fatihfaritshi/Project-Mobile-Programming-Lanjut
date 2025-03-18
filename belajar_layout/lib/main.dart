@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'manage_widget.dart';
+import 'manage_widget.dart'; // Import file manage_widget.dart
 
 void main() {
   runApp(const MyApp());
@@ -11,93 +11,151 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Layout Screen')),
+      debugShowCheckedModeBanner: false,
+      home: const MainScreen(), // Menggunakan MainScreen sebagai halaman utama
+    );
+  }
+}
 
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(color: Color.fromARGB(255, 7, 2, 74)),
-                child: Text(
-                  'Menu Drawer',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
+class MainScreen extends StatelessWidget {
+  const MainScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Layout Screen')),
+
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(color: Color.fromARGB(255, 7, 2, 74)),
+              child: Text(
+                'Menu Drawer',
+                style: TextStyle(color: Colors.white, fontSize: 20),
               ),
-              ListTile(
-                leading: const Icon(Icons.home),
-                title: const Text('Home'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.settings),
-                title: const Text('Settings'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.logout),
-                title: const Text('Logout'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.widgets),
-                title: const Text('Manage Widget'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ManageWidget(),
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('Logout'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.widgets),
+              title: const Text('Manage Widget'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ManageWidget()),
+                );
+              },
+            ),
+          ],
         ),
+      ),
 
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            double screenWidth = MediaQuery.of(context).size.width;
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          double screenWidth = MediaQuery.of(context).size.width;
+          double textSize = screenWidth * 0.05;
 
-            // Menyesuaikan ukuran teks berdasarkan lebar layar
-            double textSize = screenWidth * 0.05;
-
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Selamat datang di layout: scaffold!',
-                    style: TextStyle(fontSize: textSize),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 20), // Jarak antara teks dan kotak
-                  Container(
-                    width: screenWidth * 0.8,
-                    height: 200,
-                    color: Color.fromARGB(255, 7, 2, 74),
-                    child: Center(
-                      child: Text(
-                        'Responsive Box',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: textSize * 1.2,
-                        ),
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Selamat datang di layout: scaffold!',
+                  style: TextStyle(fontSize: textSize * 0.8),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 60),
+                
+                Container(
+                  width: screenWidth * 0.7,
+                  height: 150,
+                  color: const Color.fromARGB(255, 7, 2, 74),
+                  child: Center(
+                    child: Text(
+                      'Responsive Box',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: textSize * 1.0,
                       ),
                     ),
                   ),
-                ],
-              ),
-            );
-          },
-        ),
+                ),
+
+                Container(
+                  width: screenWidth * 0.4,
+                  height: 90,
+                  padding: const EdgeInsets.all(16),
+                  margin: const EdgeInsets.symmetric(vertical: 40, horizontal: 30),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 12, 46, 167),
+                    border: Border.all(color: const Color.fromARGB(255, 7, 2, 74), width: 3),
+                  ),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Box Model',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: textSize * 0.6,
+                      )
+                    ),
+                  ),
+                ),
+              
+
+                const SizedBox(height: 60),
+                FractionallySizedBox(
+                  widthFactor: 0.6, // Lebar tombol 80% dari lebar layar
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ManageWidget(),
+                        ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(
+                        vertical:
+                            MediaQuery.of(context).size.height *
+                            0.02, // Tinggi tombol 2% dari tinggi layar
+                        horizontal: 20,
+                      ),
+                      textStyle: TextStyle(
+                        fontSize:
+                            MediaQuery.of(context).size.width *
+                            0.04, // Font size 4% dari lebar layar
+                      ),
+                    ),
+                    child: const Text('Go to Manage Widget'),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
