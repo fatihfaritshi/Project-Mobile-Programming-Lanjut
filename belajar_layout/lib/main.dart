@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'manage_widget.dart'; // Import file manage_widget.dart
+import 'manage_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const MainScreen(), // Menggunakan MainScreen sebagai halaman utama
+      home: const MainScreen(),
     );
   }
 }
@@ -86,7 +86,7 @@ class MainScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 60),
-                
+
                 Container(
                   width: screenWidth * 0.7,
                   height: 150,
@@ -106,10 +106,16 @@ class MainScreen extends StatelessWidget {
                   width: screenWidth * 0.4,
                   height: 90,
                   padding: const EdgeInsets.all(16),
-                  margin: const EdgeInsets.symmetric(vertical: 40, horizontal: 30),
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 40,
+                    horizontal: 30,
+                  ),
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 12, 46, 167),
-                    border: Border.all(color: const Color.fromARGB(255, 7, 2, 74), width: 3),
+                    border: Border.all(
+                      color: const Color.fromARGB(255, 7, 2, 74),
+                      width: 3,
+                    ),
                   ),
                   child: Align(
                     alignment: Alignment.center,
@@ -118,15 +124,14 @@ class MainScreen extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: textSize * 0.6,
-                      )
+                      ),
                     ),
                   ),
                 ),
-              
 
                 const SizedBox(height: 60),
                 FractionallySizedBox(
-                  widthFactor: 0.6, // Lebar tombol 80% dari lebar layar
+                  widthFactor: 0.6,
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(
@@ -138,15 +143,11 @@ class MainScreen extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(
-                        vertical:
-                            MediaQuery.of(context).size.height *
-                            0.02, // Tinggi tombol 2% dari tinggi layar
+                        vertical: MediaQuery.of(context).size.height * 0.02,
                         horizontal: 20,
                       ),
                       textStyle: TextStyle(
-                        fontSize:
-                            MediaQuery.of(context).size.width *
-                            0.04, // Font size 4% dari lebar layar
+                        fontSize: MediaQuery.of(context).size.width * 0.04,
                       ),
                     ),
                     child: const Text('Go to Manage Widget'),
