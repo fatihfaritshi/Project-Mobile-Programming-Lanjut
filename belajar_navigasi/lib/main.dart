@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Navigation Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 6, 3, 100)),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 34, 28, 188)),
       ),
       initialRoute: '/',
       routes: {
