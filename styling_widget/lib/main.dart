@@ -10,31 +10,39 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Container Decorations Demo',
+      title: 'Stack Widget Demo',
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Container & Decorations'),
-          backgroundColor: Colors.orange,
+          title: const Text('Stack Widget'),
+          backgroundColor: Colors.green,
         ),
         body: Center(
-          child: Container(
-            margin: const EdgeInsets.all(20),
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Colors.amber,
-              borderRadius: BorderRadius.circular(20), // TUGAS TAMBAHAN
-              border: Border.all(                      // TUGAS TAMBAHAN
-                color: const Color.fromARGB(255, 10, 21, 137),
-                width: 2,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                width: 200,
+                height: 200,
+                color: Colors.green,
               ),
-              boxShadow: [
-                const BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5,
+              const Text(
+                'Di Atas Kotak',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
                 ),
-              ],
-            ),
-            child: const Text('Ini Container dengan dekorasi'),
+              ),
+              // TUGAS TAMBAHAN 
+              const Positioned(
+                bottom: 8,
+                right: 8,
+                child: Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                  size: 30,
+                ),
+              ),
+            ],
           ),
         ),
       ),
