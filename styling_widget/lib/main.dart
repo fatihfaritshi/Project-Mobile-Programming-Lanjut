@@ -10,40 +10,44 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Stack Widget Demo',
+      title: 'Card Widget Demo',
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Stack Widget'),
-          backgroundColor: Colors.green,
+          title: const Text('Card Widget'),
+          backgroundColor: Colors.teal,
         ),
-        body: Center(
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Container(
-                width: 200,
-                height: 200,
-                color: Colors.green,
-              ),
-              const Text(
-                'Di Atas Kotak',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
+        body: Stack(
+          children: [
+            Center(
+              child: Card(
+                elevation: 4,
+                margin: const EdgeInsets.all(16),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min, 
+                    children: [
+                      const ListTile(
+                        leading: Icon(Icons.person),
+                        title: Text('M. Fatieh Akram Faritshi'),
+                        subtitle: Text('Teknik Informatika'),
+                      ),
+                      const SizedBox(height: 8),
+                      // TUGAS TAMBAHAN
+                      ElevatedButton(
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Profil dibuka')),
+                          );
+                        },
+                        child: const Text('Lihat Profil'),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              // TUGAS TAMBAHAN 
-              const Positioned(
-                bottom: 8,
-                right: 8,
-                child: Icon(
-                  Icons.star,
-                  color: Colors.yellow,
-                  size: 30,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
