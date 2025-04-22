@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -10,80 +8,101 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Halaman Search Mata Kuliah',
-      home: const SearchPage(),
+      title: 'Halaman NestedScrollView',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        useMaterial3: true,
+      ),
+      home: const NestedScrollExample(),
     );
   }
 }
 
-class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
-
-  @override
-  State<SearchPage> createState() => _SearchPageState();
-}
-
-class _SearchPageState extends State<SearchPage> {
-  final List<String> _items = [
-    'Pemrograman Sistem Bergerak',
-    'Statistik',
-    'Kalkulus',
-    'Fisika',
-    'Agama',
-    'Bahasa Inggris',
-    'Kewirausahaan',
-    'Jaringan Komputer',
-    'Struktur Data',
-    'Kecerdasan Buatan',
-    'Data Mining',
-    'Machine Learning',
-    'Pemrograman Jaringan',
-    'Pengolahan Citra Digital',
-    'Blockchain',
-    'Mobile Programmig Lanjut',
-  ];
-
-  String _query = '';
+class NestedScrollExample extends StatelessWidget {
+  const NestedScrollExample({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final filteredItems =
-        _items
-            .where((item) => item.toLowerCase().contains(_query.toLowerCase()))
-            .toList();
-
     return Scaffold(
-      appBar: AppBar(title: const Text('Search View')),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: TextField(
-              decoration: const InputDecoration(
-                labelText: 'Search...',
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.search),
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
+            SliverAppBar(
+              expandedHeight: 220.0,
+              floating: false,
+              pinned: true,
+              flexibleSpace: FlexibleSpaceBar(
+                title: const Text('Explore List'),
+                background: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    Image.network(
+                      'https://github.com/fatihfaritshi/fatihfaritshi/blob/main/LABEL.png?raw=true',
+                      fit: BoxFit.cover,
+                    ),
+                    Container(
+                      color: Colors.black.withOpacity(0.3),
+                    ),
+                  ],
+                ),
               ),
-              onChanged: (value) {
-                setState(() {
-                  _query = value;
-                });
-              },
             ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: filteredItems.length,
-              itemBuilder: (context, index) {
-                return ListTile(title: Text(filteredItems[index]));
-              },
-            ),
-          ),
-        ],
+          ];
+        },
+        body: ListView.builder(
+          itemCount: 21,
+          padding: const EdgeInsets.only(top: 8.0),
+          itemBuilder: (context, index) {
+            // Tombol di tengah (setelah item ke-10)
+            if (index == 10) {
+              return Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  child: ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 45, 55, 161),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24, vertical: 14),
+                    ),
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Tombol aksi ditekan!')),
+                      );
+                    },
+                    icon: const Icon(Icons.touch_app),
+                    label: const Text('Tekan Aku'),
+                  ),
+                ),
+              );
+            }
+
+            return Card(
+              margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: const Color.fromARGB(255, 45, 55, 161),
+                  child: Text('${index + 1}'),
+                ),
+                title: Text('Item ke-${index + 1}'),
+                subtitle: const Text('Deskripsi singkat item'),
+                trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 16),
+                onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Kamu memilih item ke-${index + 1}')),
+                  );
+                },
+              ),
+            );
+          },
+        ),
       ),
     );
   }
 }
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
